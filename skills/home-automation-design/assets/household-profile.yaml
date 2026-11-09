@@ -1,7 +1,7 @@
 # 空白规划模板，不是可部署的 HA 配置。复制到私有目录填写，不提交家庭资料。
 # choice: not_discussed / proposed / confirmed / disabled
 # null 表示未确定，不能自动当作 false、零、无人或同意；[] 不证明不存在设备/规则。
-profile_version: 2
+profile_version: 3
 site:
   name: null
   installation: null
@@ -15,6 +15,15 @@ household:
   pets: []
   sleep_and_shift_preferences: []
   manual_control_preferences: []
+implementation:
+  preferred_engine: ha_native # 用户指定其他实现时覆盖，不默认迁移已有系统
+  user_selected_engine: null
+  shared_and_persistent_variables: ha_helpers
+  helper_entities: [] # 含用途、类型、单位、范围、writer、恢复策略
+mode_controls:
+  business_mode_selectors: [] # 每轴 input_select、选项、界面入口、来源、实际状态、保持/恢复自动
+  homekit_export_policy: include_user_modes_when_bridge_added
+  explicit_export_exclusions: []
 physical_devices: []
 # 每项含 identity、area、integrations；capability 指定 reader、writer、feedback、health、fallback。
 bedroom_shared_logic:
@@ -51,7 +60,7 @@ lighting_profiles: []
 # ambient_source、dark_enter_threshold、bright_exit_threshold、stability、minimum_hold、
 # lamp_feedback_policy、relight_policy、manual_suppression_scope_and_release、missing/failed_sensor_policy。
 modes: []
-# 每项含 axis、enter、exit、source、priority、hold、restore_policy。
+# 每项含 axis、selector_helper、manual_entry、resume_auto、enter、exit、source、priority、hold、restore_policy。
 rules: []
 # 每项含 trigger、read_before_act、intent、owner、guards、actions、confirmation、deadline、generation、recovery。
 cross_room_dependencies: []
@@ -87,6 +96,7 @@ apple_home:
   centralized_bridge_preference: null
   accessory_count: null
   protocol_exceptions: []
+  mode_selector_exports: [] # 选择器、目标版本能力、选项映射、状态反馈、恢复自动、验证
   partition_capable_vacuums: [] # 源能力、房间/命令、所选路线、节点模式与苹果环境
 validation:
   configuration_evidence: []
