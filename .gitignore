@@ -1,0 +1,18 @@
+# 家庭填写资料、凭据、运行记录与本地工作文件不进入公开仓库。
+.env
+.env.*
+secrets.yaml
+*.local.yaml
+*.local.yml
+local_profiles/
+private/
+work/
+backups/
+exports/
+*.log
+*.zip
+__pycache__/
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

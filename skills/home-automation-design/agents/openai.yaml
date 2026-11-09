@@ -1,0 +1,4 @@
+interface:
+  display_name: "CT智能家居自动化"
+  short_description: "从空白 HA 到全屋联动，支持卧室复用、照明、占用清扫及苹果家庭"
+  default_prompt: "使用 $home-automation-design 按我的家庭设备和偏好规划自动化，先审阅与讨论，再按授权实施。"

@@ -1,0 +1,95 @@
+# 空白规划模板，不是可部署的 HA 配置。复制到私有目录填写，不提交家庭资料。
+# choice: not_discussed / proposed / confirmed / disabled
+# null 表示未确定，不能自动当作 false、零、无人或同意；[] 不证明不存在设备/规则。
+profile_version: 2
+site:
+  name: null
+  installation: null
+  core_version: null
+  timezone: null
+  agent_execution_location: null
+  maintenance_connection: null # 只写连接类型，不写令牌/密码/配对码
+  authorized_scope: null
+household:
+  residents_and_guests: []
+  pets: []
+  sleep_and_shift_preferences: []
+  manual_control_preferences: []
+physical_devices: []
+# 每项含 identity、area、integrations；capability 指定 reader、writer、feedback、health、fallback。
+bedroom_shared_logic:
+  choice: not_discussed
+  auto_sleep_inference:
+    choice: not_discussed
+    daytime_entry: null
+    nighttime_entry: null
+    entry_stable_seconds: null
+    door_and_curtain_requirements: null
+    exit_evidence: null
+    exit_stable_seconds: null
+  normal_lighting_and_nightlights: null
+  naps_and_shift_work: null
+  night_visits_and_waking: null
+  shared_bed_and_guests: null
+  manual_hold_and_release: null
+  missing_sensor_policy: null
+  failed_sensor_policy: null
+rooms: []
+# 每项含 id、role、capabilities、shared_logic_ref、parameter_overrides、explicit_exceptions。
+study:
+  choice: not_discussed
+  activity_model: null # 共用书桌专注逻辑，或确认需要独立学习/工作模式
+  entry_sources: []
+  learning_scene_ref: null
+  work_scene_ref: null
+  daily_scene_ref: null
+  absence_hold_seconds: null # 10 分钟仅为可讨论试用值，不预先启用
+  lighting_during_hold: null
+  exit_and_restore: null
+lighting_profiles: []
+# 每项含 room、choice、selected_lights、brightness、color_temperature、units、occupancy_source、
+# ambient_source、dark_enter_threshold、bright_exit_threshold、stability、minimum_hold、
+# lamp_feedback_policy、relight_policy、manual_suppression_scope_and_release、missing/failed_sensor_policy。
+modes: []
+# 每项含 axis、enter、exit、source、priority、hold、restore_policy。
+rules: []
+# 每项含 trigger、read_before_act、intent、owner、guards、actions、confirmation、deadline、generation、recovery。
+cross_room_dependencies: []
+# 只有 choice: confirmed 才启用。每项含 source、target、direction、preserve/activate/sync、guards、release。
+occupancy_accounting:
+  choice: not_discussed
+  counting_basis: null # 建议 room_occupied_duration，不默认按人数加权
+  presence_sources_by_room: []
+  pass_through_filter: null
+  unknown_gap_policy: null
+  persistence_and_restart: null
+  history_retention: null
+cleaning_scheduler:
+  choice: not_discussed
+  demand_rules: [] # 房间、时长阈值/单位、周期/人工来源、OR/AND、清扫类型
+  robot_and_map_bindings: [] # 物理机、地图、真实分区、能力来源；不要填公开模板
+  allowed_windows: null
+  occupancy_and_sleep_guards: null
+  door_and_route_guards: null
+  pets_children_and_floor_readiness: null
+  minimum_interval_and_frequency_limit: null
+  busy_robot_policy: null
+  task_ownership_and_deduplication: null
+  completion_evidence: null
+  partial_completion_and_new_occupancy: null
+  manual_cleaning_reconciliation: null
+missing_capabilities: []
+apple_home:
+  choice: not_discussed
+  existing_pairings: []
+  export_scope: null
+  preferred_route: null
+  centralized_bridge_preference: null
+  accessory_count: null
+  protocol_exceptions: []
+  partition_capable_vacuums: [] # 源能力、房间/命令、所选路线、节点模式与苹果环境
+validation:
+  configuration_evidence: []
+  simulation_evidence: []
+  physical_evidence: []
+  unverified: []
