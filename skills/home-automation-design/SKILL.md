@@ -3,7 +3,7 @@ name: home-automation-design
 description: 从空白 Home Assistant 引导设备接入和 AI 维护，或审计、设计及维护已有家庭的全屋自动化；处理多设备联动、模式仲裁、并发保护、能力缺失降级，以及苹果家庭与 Matter 导出。适用于家庭自动化建设和改造，不用于无关的通用软件开发。
 metadata:
   display-name: CT智能家居自动化
-  version: "1.0.1"
+  version: "1.0.2"
 ---
 
 # CT智能家居自动化

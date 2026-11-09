@@ -2,7 +2,7 @@
 
 让 AI 根据你家的设备与生活习惯，规划、建设和维护 Home Assistant 自动化。
 
-**当前版本：v1.0.1。** 这是可供 AI 读取或安装的技能与参考文档，不是 HA 集成、自动运行程序或预设全屋配置。除非用户指定其他方案，创建自动化默认优先使用 HA 原生自动化与脚本，界面或 YAML 均可；需要保存、共享和人工配置的变量使用 Helper 实体。用户指定 AppDaemon、Node-RED、Pyscript 等时尊重选择，不强制迁移已有规则，也不要求购买一套固定设备。
+**当前版本：v1.0.2。** 这是可供 AI 读取或安装的技能与参考文档，不是 HA 集成、自动运行程序或预设全屋配置。除非用户指定其他方案，创建自动化默认优先使用 HA 原生自动化与脚本，界面或 YAML 均可；需要保存、共享和人工配置的变量使用 Helper 实体。用户指定 AppDaemon、Node-RED、Pyscript 等时尊重选择，不强制迁移已有规则，也不要求购买一套固定设备。
 
 ## 快速开始：把链接发给 AI
 
@@ -32,6 +32,44 @@
 
 技能目录：[`skills/home-automation-design`](skills/home-automation-design/)。安装时保留目录中的 `SKILL.md`、`references/`、`assets/` 和 `agents/`，不要只复制入口文件。
 
+以下按官方文档整理，菜单、目录与可用功能仍以所装版本为准，不表示所有客户端均已实机验证。`~` 表示当前用户主目录；项目级路径相对于实际工作项目，不是本技能仓库。已有同名技能时先比较和备份自定义内容，避免多份旧版本互相覆盖。
+
+| 客户端 | 推荐方式 | 安装后的检查 |
+|---|---|---|
+| WorkBuddy | 下载技能 ZIP，在技能页面上传导入 | “已安装”中可见且启用，新对话可调用 |
+| DeepSeek Harness（DSH） | 完整目录放入项目 `.dsh/skills/` 或用户技能根目录 | 当前会话的技能目录能发现并加载正文及参考 |
+| Codex | 使用客户端提供的 `$skill-installer` | 能发现并调用 `$home-automation-design` |
+| Claude Code | 完整目录放入 `.claude/skills/` 或 `~/.claude/skills/` | `/home-automation-design` 可用 |
+| Cursor | 完整目录放入 `.cursor/skills/` 或 `~/.cursor/skills/` | Agent 的 `/` 技能列表可找到 |
+| GitHub Copilot | 完整目录放入项目 `.github/skills/` | 支持 Agent Skills 的对应端可发现并使用 |
+| Gemini CLI | `gemini skills install` 指定仓库子目录 | `/skills list` 中可见 |
+| OpenClaw | 将完整目录放入配置工作区的 `skills/` | 当前 Agent 的技能列表中可用 |
+
+### 下载技能包或目录
+
+从 [v1.0.2 Release](https://github.com/casatift/ct-smart-home-automation/releases/tag/v1.0.2) 下载附件 `ct-smart-home-automation-v1.0.2.zip`。**该技能 ZIP 的包根目录直接包含 `SKILL.md`、`references/`、`assets/`、`agents/` 和许可证**，适合上传导入。它与 GitHub 自动生成的整个仓库 Source code ZIP 不同。
+
+目录式安装时，将技能 ZIP 解压到名为 `home-automation-design` 的目标目录，最终检查 `<技能根目录>/home-automation-design/SKILL.md` 存在。也可从源码直接复制 `skills/home-automation-design` 整个文件夹。不要把整个仓库套在技能目录内。
+
+### WorkBuddy
+
+1. 下载上面的技能 ZIP。
+2. 打开左侧“专家·技能·连接器”→“技能”→“添加技能”→“上传技能”，选择 ZIP 导入；菜单名称以客户端版本为准。
+3. 到“已安装”确认技能存在且处于启用状态，新建对话后输入：“使用 CT智能家居自动化（home-automation-design），先只读规划我的 Home Assistant，不修改配置、不操作设备。”
+
+官方文档说明：对话中搜索并安装技能主要面向技能市场，自行提供的技能包应通过“上传技能”导入。本仓库未声称已上架 WorkBuddy 技能市场或 SkillHub；直接粘贴 GitHub 链接不等于完成安装。参见 [WorkBuddy 技能说明](https://www.workbuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/Skills-Market)。
+
+### DeepSeek Harness（DSH）
+
+DSH 指 **DeepSeek Harness**，不是普通 DeepSeek 网页聊天。安装完整技能目录，选择一种范围：
+
+- 当前项目：`.dsh/skills/home-automation-design/SKILL.md`；官方也支持项目 `.agents/skills/`。
+- 用户范围：默认 `~/.dsh/skills/home-automation-design/SKILL.md`；若配置了 `DSH_HOME` 或提供方的 `dshHome`，使用实际根目录下的 `skills/`。
+
+在对应项目中打开 DSH，让它列出可用技能并加载 `home-automation-design`，再开始只读规划；若未发现，检查当前工作目录、所用版本和 filesystem skill provider 是否启用，再刷新或新建会话。应能继续读取引用的 `references/`，不能只确认名称出现在列表。
+
+本仓库提供目录式技能，不是 DSH 插件包，不使用插件安装命令安装整个仓库。不要多套一层 `skills/home-automation-design`：DSH 的本地提供方不递归发现任意深度的 `SKILL.md`。参见 [DSH 官方 Skills 文档](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/subsystems/skills.zh.md)和[本地提供方配置](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/skill/skill-filesystem/src/index.ts)。
+
 ### Codex
 
 如果客户端提供 `$skill-installer`，可以输入：
@@ -52,9 +90,55 @@ https://github.com/casatift/ct-smart-home-automation/tree/main/skills/home-autom
 
 展示名称是“CT智能家居自动化”，技能标识保留为 `home-automation-design`。Codex 的扫描目录和发现方式可能随版本变化，以[官方技能文档](https://developers.openai.com/codex/skills/)及客户端实际安装工具为准；若安装后未显示，按客户端提示刷新或重启。
 
+### Claude Code
+
+将完整目录放入项目 `.claude/skills/home-automation-design/`，或用户目录 `~/.claude/skills/home-automation-design/`。在 Claude Code 中输入：
+
+```text
+/home-automation-design 先只读审阅我的 Home Assistant，讨论方案，不修改生产系统。
+```
+
+本地个人技能不会因此自动进入 Claude 网页聊天、Cowork 或云端会话；这些产品使用各自的技能管理与同步机制。参见 [Claude Code Skills 官方文档](https://code.claude.com/docs/en/skills)。
+
+### Cursor
+
+将完整目录放入项目 `.cursor/skills/home-automation-design/`，或用户目录 `~/.cursor/skills/home-automation-design/`。在 Agent 对话中输入 `/`，搜索并选择 `home-automation-design`，再说明只读规划目标；也可要求 Agent 使用该技能。
+
+本地目录可用不代表 Cloud Agents 已同步。Cursor 的“从 GitHub 导入插件”还需要插件/marketplace 清单，本仓库目前没有该包装，应按目录式安装，不把技能仓库当可直接导入的 Cursor 插件。参见 [Cursor Agent Skills 官方文档](https://cursor.com/docs/context/skills)。
+
+### GitHub Copilot
+
+将完整目录放入工作仓库 `.github/skills/home-automation-design/`，在该仓库打开支持 Agent Skills 的 Copilot Agent，让它使用此技能。Copilot CLI 的个人技能还可使用 `~/.copilot/skills/home-automation-design/`；其他端支持范围按其版本确认。
+
+只在聊天里粘贴链接，不会自动将技能装入所有 Copilot 端。云端 Agent 还需在其执行环境能读取该目录，并单独解决 HA 可达性。参见 [GitHub Copilot Agent Skills 官方文档](https://docs.github.com/en/copilot/concepts/customizations/agent-skills)。
+
+### Gemini CLI
+
+支持技能安装的版本可在终端执行：
+
+```sh
+gemini skills install https://github.com/casatift/ct-smart-home-automation.git --path skills/home-automation-design --scope user
+```
+
+仅当前项目使用时改为 `--scope workspace`。在交互会话中运行 `/skills reload`，再用 `/skills list` 检查并要求使用 `home-automation-design`；依客户端提示确认技能激活。此处是 Gemini CLI，不等于 Gemini 网页聊天。参见 [Gemini CLI Agent Skills 官方文档](https://geminicli.com/docs/cli/skills/)。
+
+### OpenClaw
+
+将完整技能目录放入当前 Agent 已配置工作区的 `skills/home-automation-design/`，确认 `SKILL.md` 位于该目录根部，再在相应 Agent 的新会话中检查并调用。工作区位置以实际配置为准；其他工作区或节点不自动共享。
+
+支持相应命令的版本也可在下载完整仓库后运行：
+
+```sh
+openclaw skills install ./ct-smart-home-automation/skills/home-automation-design
+```
+
+这是从本地技能目录安装。当前仓库根目录没有 `SKILL.md`，不直接使用要求源根目录有入口的 Git 仓库安装命令；本技能也未声称已上架 ClawHub。参见 [OpenClaw Skills 官方文档](https://docs.openclaw.ai/tools/skills)。
+
 ### 其他 AI Agent
 
 先确认是否支持 `SKILL.md` 格式及具体技能目录，再使用其官方安装方法。无法确认时，按“读取文档”使用，不宣称已经永久安装。不要求任何客户端额外安装 Codex 专用工具才能理解通用正文。
+
+普通 DeepSeek、ChatGPT、Gemini 网页聊天以及其他只读文档的客户端，可使用开头的通用提示或上传完整文件；除非其当前版本明确提供自定义技能安装，否则只能说明“本次已读取”，不能宣称永久安装。
 
 ## 能帮助你做什么
 
@@ -123,7 +207,7 @@ https://github.com/casatift/ct-smart-home-automation/tree/main/skills/home-autom
 
 ## 版本与验证边界
 
-v1.0.1 补充 HA 原生自动化优先、Helper 变量、模式选择器与 HomeKit 模式导出的约定。本技能提供设计与维护指导，不附带通用自动化运行引擎、计数器或机器人调度程序。具体实现由 Agent 根据目标家庭生成并验证，不能仅安装技能就宣称相关自动化已部署。
+v1.0.1 补充 HA 原生自动化优先、Helper 变量、模式选择器与 HomeKit 模式导出的约定；v1.0.2 补充多个 AI 客户端的安装与调用方法，并提供包根目录直接含 `SKILL.md` 的上传用 ZIP。本技能提供设计与维护指导，不附带通用自动化运行引擎、计数器或机器人调度程序。具体实现由 Agent 根据目标家庭生成并验证，不能仅安装技能就宣称相关自动化已部署。
 
 结构、YAML、相对链接和公开内容检查不等于所有设备、HA 版本和 AI 客户端均已实机通过。实际建设须区分源码、运行状态、历史与物理反馈，验证正常执行及应该被阻止的情况。
 
