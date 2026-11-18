@@ -2,7 +2,7 @@
 
 让 AI 根据你家的设备与生活习惯，规划、建设和维护 Home Assistant 自动化。
 
-**当前版本：v1.0.2。** 这是可供 AI 读取或安装的技能与参考文档，不是 HA 集成、自动运行程序或预设全屋配置。除非用户指定其他方案，创建自动化默认优先使用 HA 原生自动化与脚本，界面或 YAML 均可；需要保存、共享和人工配置的变量使用 Helper 实体。用户指定 AppDaemon、Node-RED、Pyscript 等时尊重选择，不强制迁移已有规则，也不要求购买一套固定设备。
+**当前版本：v1.0.3。** 这是可供 AI 读取或安装的技能与参考文档，不是 HA 集成、自动运行程序或预设全屋配置。除非用户指定其他方案，创建自动化默认优先使用 HA 原生自动化与脚本，界面或 YAML 均可；需要保存、共享和人工配置的变量使用 Helper 实体。用户指定 AppDaemon、Node-RED、Pyscript 等时尊重选择，不强制迁移已有规则，也不要求购买一套固定设备。
 
 ## 快速开始：把链接发给 AI
 
@@ -47,7 +47,7 @@
 
 ### 下载技能包或目录
 
-从 [v1.0.2 Release](https://github.com/casatift/ct-smart-home-automation/releases/tag/v1.0.2) 下载附件 `ct-smart-home-automation-v1.0.2.zip`。**该技能 ZIP 的包根目录直接包含 `SKILL.md`、`references/`、`assets/`、`agents/` 和许可证**，适合上传导入。它与 GitHub 自动生成的整个仓库 Source code ZIP 不同。
+从 [v1.0.3 Release](https://github.com/casatift/ct-smart-home-automation/releases/tag/v1.0.3) 下载附件 `ct-smart-home-automation-v1.0.3.zip`。**该技能 ZIP 的包根目录直接包含 `SKILL.md`、`references/`、`assets/`、`agents/` 和许可证**，适合上传导入。它与 GitHub 自动生成的整个仓库 Source code ZIP 不同。
 
 目录式安装时，将技能 ZIP 解压到名为 `home-automation-design` 的目标目录，最终检查 `<技能根目录>/home-automation-design/SKILL.md` 存在。也可从源码直接复制 `skills/home-automation-design` 整个文件夹。不要把整个仓库套在技能目录内。
 
@@ -161,6 +161,10 @@ openclaw skills install ./ct-smart-home-automation/skills/home-automation-design
 
 模式选择须经过同一仲裁；HA 与苹果家庭反馈不能形成循环，待处理或被阻止的请求不能显示成已生效。细节见[协调与执行](skills/home-automation-design/references/coordination.md)和[模式导出说明](skills/home-automation-design/references/apple-and-matter.md)。
 
+## 房间光照许可
+
+用可见布尔变量保存每房光照判断：on＝昏暗、允许自动补光；off＝明亮、禁止普通自动从全灭开灯。自动化启停独立设置，许可变 off 不直接关灯；无人关灯仍检查持续无人、人工保持和联动保护。支持每房阈值与迟滞，并区别传感器缺失和故障。手动关灯后是否离房解除或定时恢复，按家庭选择。详见[光照许可变量](skills/home-automation-design/references/lighting-permission.md)。
+
 ## 第一次使用，如何推进
 
 1. **先说目标和范围。** 例如“空白 HA 起步”“只读审计”“设计照明”“讨论清扫”，并说明是否已有可用连接。
@@ -197,6 +201,7 @@ openclaw skills install ./ct-smart-home-automation/skills/home-automation-design
 | [起步与接入](skills/home-automation-design/references/onboarding.md) | 空白 HA、维护连接、MCP、认证及设备接入 |
 | [协调与执行](skills/home-automation-design/references/coordination.md) | 模式仲裁、计时、并发、重启及部分失败 |
 | [房间与照明](skills/home-automation-design/references/rooms-and-lighting.md) | 卧室、书桌、开关灯条件与可选联动 |
+| [光照许可变量](skills/home-automation-design/references/lighting-permission.md) | 房间许可、迟滞、有效性、人工操作与无人关灯 |
 | [占用与清扫](skills/home-automation-design/references/occupancy-and-cleaning.md) | 占用计量、清扫需求、调度与完成结算 |
 | [能力与降级](skills/home-automation-design/references/capabilities.md) | 多集成能力来源、缺设备和故障处理 |
 | [苹果家庭与 Matter](skills/home-automation-design/references/apple-and-matter.md) | 导出选路、分区清扫及兼容性验收 |
@@ -207,7 +212,7 @@ openclaw skills install ./ct-smart-home-automation/skills/home-automation-design
 
 ## 版本与验证边界
 
-v1.0.1 补充 HA 原生自动化优先、Helper 变量、模式选择器与 HomeKit 模式导出的约定；v1.0.2 补充多个 AI 客户端的安装与调用方法，并提供包根目录直接含 `SKILL.md` 的上传用 ZIP。本技能提供设计与维护指导，不附带通用自动化运行引擎、计数器或机器人调度程序。具体实现由 Agent 根据目标家庭生成并验证，不能仅安装技能就宣称相关自动化已部署。
+v1.0.1 补充 HA 原生自动化优先、Helper 变量、模式选择器与 HomeKit 模式导出的约定；v1.0.2 补充多个 AI 客户端的安装与调用方法，并提供包根目录直接含 `SKILL.md` 的上传用 ZIP。v1.0.3 增加房间光照许可变量契约与空白配置字段，明确人工保持、再次进入、故障及关灯的独立判断。本技能提供设计与维护指导，不附带通用自动化运行引擎、计数器或机器人调度程序。具体实现由 Agent 根据目标家庭生成并验证，不能仅安装技能就宣称相关自动化已部署。
 
 结构、YAML、相对链接和公开内容检查不等于所有设备、HA 版本和 AI 客户端均已实机通过。实际建设须区分源码、运行状态、历史与物理反馈，验证正常执行及应该被阻止的情况。
 

@@ -1,7 +1,7 @@
 # 空白规划模板，不是可部署的 HA 配置。复制到私有目录填写，不提交家庭资料。
 # choice: not_discussed / proposed / confirmed / disabled
 # null 表示未确定，不能自动当作 false、零、无人或同意；[] 不证明不存在设备/规则。
-profile_version: 3
+profile_version: 4
 site:
   name: null
   installation: null
@@ -55,6 +55,10 @@ study:
   absence_hold_seconds: null # 10 分钟仅为可讨论试用值，不预先启用
   lighting_during_hold: null
   exit_and_restore: null
+lighting_permission_by_room: []
+# 每项含 room、choice、permit_entity、single_writer、ambient_source、unit、validity_policy、
+# threshold、hysteresis_delta、stability、initialization_and_restart、missing/failed_sensor_policy、
+# auto_enable_entity、manual_on_hold、manual_off_release、vacancy_off_policy、reason_entity。
 lighting_profiles: []
 # 每项含 room、choice、selected_lights、brightness、color_temperature、units、occupancy_source、
 # ambient_source、dark_enter_threshold、bright_exit_threshold、stability、minimum_hold、
