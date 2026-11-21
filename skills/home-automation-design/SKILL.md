@@ -3,7 +3,7 @@ name: home-automation-design
 description: 从空白 Home Assistant 引导设备接入和 AI 维护，或审计、设计及维护已有家庭的全屋自动化；处理多设备联动、模式仲裁、并发保护、能力缺失降级，以及苹果家庭与 Matter 导出。适用于家庭自动化建设和改造，不用于无关的通用软件开发。
 metadata:
   display-name: CT智能家居自动化
-  version: "1.0.3"
+  version: "1.0.4"
 ---
 
 # CT智能家居自动化
@@ -17,6 +17,8 @@ metadata:
 - 模式、跨房间联动、多人活动、计时与重启恢复：读 [协调与执行](references/coordination.md)。
 - 卧室共用逻辑、书房学习/工作、有人且暗及光照变化补光：读 [房间与照明](references/rooms-and-lighting.md)。
 - 房间光照许可开关、照度迟滞、人工保持与无人关灯：读 [光照许可变量](references/lighting-permission.md)。
+- 窗帘升降、百叶角度、投影遮光、直晒与补光联动：读 [窗帘与采光](references/curtains-and-daylight.md)。
+- 门磁、人物检测与房间雷达共同判断全屋在家状态：读 [全屋在家判定](references/home-presence.md)。
 - 房间占用时长、清扫需求及扫地机调度：读 [占用与清扫](references/occupancy-and-cleaning.md)。
 - 设备不足、传感器故障或同设备多个集成：读 [能力与替代](references/capabilities.md)。
 - 接入苹果家庭：读 [HomeKit 与 Matter 选路](references/apple-and-matter.md)，主动检查扫地机等设备的高级能力，不把一切降成开关。
